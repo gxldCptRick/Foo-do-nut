@@ -20,5 +20,13 @@
   "bugs": {
     "url": "https://github.com/gxldCptRick/Foo-do-nut/issues"
   },
-  "homepage": "https://github.com/gxldCptRick/Foo-do-nut#readme"
+  "homepage": "https://github.com/gxldCptRick/Foo-do-nut#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "babel": "^6.23.0"
+  }
 }
