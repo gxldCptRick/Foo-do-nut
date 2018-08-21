@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.Collections.ObjectModel;
 
 namespace FoodVIew
 {
@@ -21,39 +22,42 @@ namespace FoodVIew
     /// </summary>
     public partial class MainWindow : Window
     {
+        ObservableCollection<string> searches = new ObservableCollection<string>();
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            ReadSearches();
-        }
-
-        private void ReadSearches()
-        {
-            List<string> lines = new List<string>();
-            string line;
-
-            StreamReader reader = new StreamReader("./searches/searches.txt");
-            line = reader.ReadLine();
-
-            while (line != null)
-            {
-                lines.Add(line);
-                line = reader.ReadLine();
-            }
-
-            for (int i = 0; i < lines.Count; i++)
-            {
-            lsbxPreviousSearches.Items.Add(lines[i]);
-            }
-
-        }
-
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
+            searches.Add(this.mainPage.txtbxSearch.Text);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MessageBoxResult save = MessageBox.Show("Do you want to save your searches?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (save == MessageBoxResult.Yes)
+            {
+                SaveSearches();
+            }
+        }
+
+        private void SaveSearches()
+        {
+            using (StreamWriter writer = new StreamWriter("./searches/searches.txt"))
+            {
+                for (int i = 0; i < searches.Count; i++)
+                {
+                    writer.WriteLine(searches[i]);
+                }
+            }
 
         }
     }

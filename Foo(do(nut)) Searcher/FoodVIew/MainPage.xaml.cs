@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
+using System.Collections.ObjectModel;
 
 namespace FoodVIew
 {
@@ -20,24 +22,49 @@ namespace FoodVIew
     /// </summary>
     public partial class MainPage : Page
     {
+        ObservableCollection<string> searches = new ObservableCollection<string>();
+
         public MainPage()
         {
             InitializeComponent();
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        public void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //call a file read that reads from a list of previous searches
+            ReadSearches();
         }
 
         private void ReadSearches()
         {
+            List<string> lines = new List<string>();
+            string line;
+            StreamReader reader;
+            Directory.CreateDirectory("./searches");
 
+
+            if (File.Exists("./searches/searches.txt"))
+            {
+                reader = new StreamReader("./searches/searches.txt");
+            }
+            else
+            {
+                File.Create("./searches/searches.txt");
+                reader = new StreamReader("./searches/searches.txt");
+            }
+            line = reader.ReadLine();
+
+
+            while (line != null)
+            {
+                lines.Add(line);
+                line = reader.ReadLine();
+            }
+            lsbxPreviousSearches.ItemsSource = lines;
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
+
     }
 }
