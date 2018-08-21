@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace FoodVIew
 {
@@ -27,10 +28,31 @@ namespace FoodVIew
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //call a file read that reads from a list of previous searches
+            ReadSearches();
         }
 
         private void ReadSearches()
+        {
+            List<string> lines = new List<string>();
+            string line;
+
+            StreamReader reader = new StreamReader("./searches/searches.txt");
+            line = reader.ReadLine();
+
+            while (line != null)
+            {
+                lines.Add(line);
+                line = reader.ReadLine();
+            }
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+            lsbxPreviousSearches.Items.Add(lines[i]);
+            }
+
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
 
         }
