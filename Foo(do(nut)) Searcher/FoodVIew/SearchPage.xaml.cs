@@ -16,28 +16,13 @@ using System.Windows.Shapes;
 namespace FoodVIew
 {
     /// <summary>
-    /// Interaction logic for MainPage.xaml
+    /// Interaction logic for SearchPage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class SearchPage : Page
     {
-        public MainPage()
+        public SearchPage()
         {
             InitializeComponent();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //call a file read that reads from a list of previous searches
-        }
-
-        private void ReadSearches()
-        {
-
-        }
-
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
