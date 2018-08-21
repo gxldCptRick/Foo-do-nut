@@ -24,5 +24,15 @@ namespace FoodVIew
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //call a file read that reads from a list of previous searches
+        }
+
+        private void ReadSearches()
+        {
+
+        }
     }
 }
