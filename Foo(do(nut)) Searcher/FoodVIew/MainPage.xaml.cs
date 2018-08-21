@@ -24,6 +24,14 @@ namespace FoodVIew
         {
             InitializeComponent();
         }
+        public MainPage(List<String> prevSearches)
+        {
+            InitializeComponent();
+            foreach(var p in prevSearches)
+            {
+                lsbxPreviousSearches.Items.Add(p);
+            }
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

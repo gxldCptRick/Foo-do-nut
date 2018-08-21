@@ -8,7 +8,27 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SearchPage">
 
-    <Grid>
-        
+    <Grid Background="Purple">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".5*"/>
+            <ColumnDefinition Width=".5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".15*"/>
+            <RowDefinition Height=".85*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="FooDonut Search Engine" FontFamily="Comic Sans MS" FontSize="36" Foreground="Yellow"/>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Label Content="Results: " FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
+            <ListBox Name="lsbxResults" Background="Yellow" Foreground="Purple">
+                
+            </ListBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label Content="Search: " FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
+            <TextBox Name="txtbxSearch" Margin="10" TextAlignment="Right" Foreground="Purple" Background="Yellow" FontFamily="Comic Sans MS" FontSize="12"/>
+            <Button Name="btnSearch"  FontFamily="Comic Sans MS" FontSize="14" Content="Search" Background="Yellow" Foreground="Purple" Margin="30,10"/>
+        </StackPanel>
     </Grid>
 </Page>

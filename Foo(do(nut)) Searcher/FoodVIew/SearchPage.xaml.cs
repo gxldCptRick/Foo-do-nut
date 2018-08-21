@@ -24,5 +24,11 @@ namespace FoodVIew
         {
             InitializeComponent();
         }
+
+        public SearchPage(string searchWord)
+        {
+            InitializeComponent();
+            txtbxSearch.Text = searchWord;
+        }
     }
 }
