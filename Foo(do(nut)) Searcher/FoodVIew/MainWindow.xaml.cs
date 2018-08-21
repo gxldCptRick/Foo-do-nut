@@ -24,5 +24,10 @@ namespace FoodVIew
         {
             InitializeComponent();
         }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
