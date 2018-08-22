@@ -42,18 +42,14 @@ namespace FoodVIew
             Directory.CreateDirectory("./searches");
 
 
+            if (!File.Exists(filePath))
+            {
+                File.Create(filePath);
+            }
+
             using (StreamReader reader = new StreamReader(filePath))
             {
-                if (File.Exists(filePath))
-                {
-                    line = reader.ReadLine();
-                }
-                else
-                {
-                    File.Create(filePath);
-                    line = reader.ReadLine();
-                }
-
+                line = reader.ReadLine();
 
                 while (line != null)
                 {
