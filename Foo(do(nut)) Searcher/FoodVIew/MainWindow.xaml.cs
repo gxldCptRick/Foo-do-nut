@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Collections.ObjectModel;
+using CommonLib;
 
 namespace FoodVIew
 {
@@ -23,20 +24,22 @@ namespace FoodVIew
     public partial class MainWindow : Window
     {
         ObservableCollection<string> searches = new ObservableCollection<string>();
+        public string filePath = "./searches/searches.txt";
+        FileGuy fileGuy = new FileGuy();
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        public void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             searches.Add(this.mainPage.txtbxSearch.Text);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            this.mainPage.btnSearch.Click += btnSearch_Click;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -51,14 +54,7 @@ namespace FoodVIew
 
         private void SaveSearches()
         {
-            using (StreamWriter writer = new StreamWriter("./searches/searches.txt"))
-            {
-                for (int i = 0; i < searches.Count; i++)
-                {
-                    writer.WriteLine(searches[i]);
-                }
-            }
-
+            fileGuy.WriteFile(searches);
         }
     }
 }
