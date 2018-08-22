@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Collections.ObjectModel;
+using CommonLib;
 
 namespace FoodVIew
 {
@@ -24,6 +25,7 @@ namespace FoodVIew
     {
         ObservableCollection<string> searches = new ObservableCollection<string>();
         public string filePath = "./searches/searches.txt";
+        FileGuy fileGuy = new FileGuy();
 
         public MainWindow()
         {
@@ -52,26 +54,7 @@ namespace FoodVIew
 
         private void SaveSearches()
         {
-            if (File.Exists(filePath))
-            {
-                using (StreamWriter writer = File.AppendText(filePath))
-                {
-                    foreach (var search in searches)
-                    {
-                        writer.WriteLine(search);
-                    }
-                }
-            }
-            else
-            {
-                using (StreamWriter writer = new StreamWriter(filePath))
-                {
-                    foreach (var search in searches)
-                    {
-                        writer.WriteLine(search);
-                    }
-                }
-            }
+            fileGuy.WriteFile(searches);
         }
     }
 }

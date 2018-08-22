@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Collections.ObjectModel;
+using CommonLib;
 
 namespace FoodVIew
 {
@@ -22,8 +23,9 @@ namespace FoodVIew
     /// </summary>
     public partial class MainPage : Page
     {
-        ObservableCollection<string> searches = new ObservableCollection<string>();
+        ICollection<string> searches = new ObservableCollection<string>();
         public string filePath = "./searches/searches.txt";
+        FileGuy fileGuy = new FileGuy();
 
         public MainPage()
         {
@@ -32,33 +34,12 @@ namespace FoodVIew
         public void Page_Loaded(object sender, RoutedEventArgs e)
         {
             ReadSearches();
-
         }
 
         private void ReadSearches()
         {
-            List<string> lines = new List<string>();
-            string line;
-            Directory.CreateDirectory("./searches");
-
-
-            if (!File.Exists(filePath))
-            {
-                File.Create(filePath);
-            }
-
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                line = reader.ReadLine();
-
-                while (line != null)
-                {
-                    lines.Add(line);
-                    line = reader.ReadLine();
-                }
-            }
-
-            lsbxPreviousSearches.ItemsSource = lines;
+            searches = fileGuy.ReadFile();
+            lsbxPreviousSearches.ItemsSource = searches;
         }
 
         public event EventHandler ButtonMethodThing;
