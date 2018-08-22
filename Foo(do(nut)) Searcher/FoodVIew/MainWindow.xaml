@@ -5,9 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FoodVIew"
         mc:Ignorable="d"
-        Title="FooDonut Search Engine" Height="450" Width="800">
-
-        <local:MainPage x:Name="MainPage">
-        
-        </local:MainPage>
+        Title="FooDonut Search Engine" Height="450" Width="800" Closing="Window_Closing">
+    <local:MainPage x:Name="mainPage"></local:MainPage>
 </Window>
