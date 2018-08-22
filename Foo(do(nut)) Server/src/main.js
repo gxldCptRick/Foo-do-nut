@@ -8,14 +8,19 @@ const app = express();
 
 app.get('/wiki/:query', function(req, res){
     MongoClient.connect(urlForMongo, {useNewUrlParser: true } , (err, client) => {
-        console.log('connected');
-        let result = client.db(wikiName).collection(wikiCollection).find({title: {$regex: req.params.query, $options: 'i'}}).toArray().then((collection) => {
-            client.close();
-            console.log('closing connection');
-            res.json(collection);
-        }).catch((err) => {
-            console.log(err);
-            res.send(err);
+        let resultStream = client.db(wikiName).collection(wikiCollection).find({title: {$regex: req.params.query, $options: 'i'}}).limit(5).stream();
+        res.writeHead(200, { 'Content-Type': 'application/json'});
+        console.log(req.ip);
+        res.write('[');
+        resultStream.on('data', (data) => {
+            res.write(JSON.stringify(data));
+            res.write(',');
+        });
+
+        resultStream.on('end', () => {
+            res.write(']');
+            res.end();
+            console.log("closed");
         });
     })
 });
