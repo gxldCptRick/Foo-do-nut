@@ -23,6 +23,7 @@ namespace FoodVIew
     public partial class MainPage : Page
     {
         ObservableCollection<string> searches = new ObservableCollection<string>();
+        public string filePath = "./searches/searches.txt";
 
         public MainPage()
         {
@@ -31,40 +32,44 @@ namespace FoodVIew
         public void Page_Loaded(object sender, RoutedEventArgs e)
         {
             ReadSearches();
+
         }
 
         private void ReadSearches()
         {
             List<string> lines = new List<string>();
             string line;
-            StreamReader reader;
             Directory.CreateDirectory("./searches");
 
 
-            if (File.Exists("./searches/searches.txt"))
+            using (StreamReader reader = new StreamReader(filePath))
             {
-                reader = new StreamReader("./searches/searches.txt");
-            }
-            else
-            {
-                File.Create("./searches/searches.txt");
-                reader = new StreamReader("./searches/searches.txt");
-            }
-            line = reader.ReadLine();
+                if (File.Exists(filePath))
+                {
+                    line = reader.ReadLine();
+                }
+                else
+                {
+                    File.Create(filePath);
+                    line = reader.ReadLine();
+                }
 
 
-            while (line != null)
-            {
-                lines.Add(line);
-                line = reader.ReadLine();
+                while (line != null)
+                {
+                    lines.Add(line);
+                    line = reader.ReadLine();
+                }
             }
+
             lsbxPreviousSearches.ItemsSource = lines;
         }
 
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        public event EventHandler ButtonMethodThing;
 
+        protected virtual void OnButtonMethodThing()
+        {
+            ButtonMethodThing?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

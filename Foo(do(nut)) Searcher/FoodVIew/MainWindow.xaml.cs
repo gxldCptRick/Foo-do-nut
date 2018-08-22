@@ -23,20 +23,21 @@ namespace FoodVIew
     public partial class MainWindow : Window
     {
         ObservableCollection<string> searches = new ObservableCollection<string>();
+        public string filePath = "./searches/searches.txt";
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        public void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             searches.Add(this.mainPage.txtbxSearch.Text);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            this.mainPage.btnSearch.Click += btnSearch_Click;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -51,14 +52,26 @@ namespace FoodVIew
 
         private void SaveSearches()
         {
-            using (StreamWriter writer = new StreamWriter("./searches/searches.txt"))
+            if (File.Exists(filePath))
             {
-                for (int i = 0; i < searches.Count; i++)
+                using (StreamWriter writer = File.AppendText(filePath))
                 {
-                    writer.WriteLine(searches[i]);
+                    foreach (var search in searches)
+                    {
+                        writer.WriteLine(search);
+                    }
                 }
             }
-
+            else
+            {
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    foreach (var search in searches)
+                    {
+                        writer.WriteLine(search);
+                    }
+                }
+            }
         }
     }
 }
