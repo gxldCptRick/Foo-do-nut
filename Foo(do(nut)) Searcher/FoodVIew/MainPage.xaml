@@ -24,7 +24,7 @@
         
         <Label Grid.Row="1" Grid.Column="0" Content="Previous Seraches" FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
             
-        <ListBox Grid.Row="2" Grid.Column="0" Name="lsbxPreviousSearches" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12" Margin="10" Height="275"/>
+        <ListBox Grid.Row="2" Grid.Column="0" MouseDoubleClick="DoubleClickList" Name="lsbxPreviousSearches" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12" Margin="10" Height="275"/>
             
         <Button Grid.Row="3" Grid.Column="0" Name="btnClear" FontFamily="Comic Sans MS" FontSize="14" Content="Clear Previous Searches" Background="Yellow" Foreground="Purple" Margin="30,10"/>
 

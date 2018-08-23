@@ -13,7 +13,7 @@ namespace CommonLib
 
         public ICollection<string> ReadFile()
         {
-            ICollection<string> searches = new List<string>();
+            ICollection<string> searches = new HashSet<string>();
 
             Directory.CreateDirectory("./searches");
 
@@ -37,27 +37,13 @@ namespace CommonLib
 
         public void WriteFile(ICollection<string> searches)
         {
-            if (File.Exists(filePath))
+            using (StreamWriter writer = new StreamWriter(filePath))
             {
-                using (StreamWriter writer = File.AppendText(filePath))
+                foreach (var search in searches)
                 {
-                    foreach (var search in searches)
-                    {
-                        writer.WriteLine(search);
-                    }
-                }
-            }
-            else
-            {
-                using (StreamWriter writer = new StreamWriter(filePath))
-                {
-                    foreach (var search in searches)
-                    {
-                        writer.WriteLine(search);
-                    }
+                    writer.WriteLine(search);
                 }
             }
         }
-
     }
 }
