@@ -21,7 +21,9 @@
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="FooDonut Search Engine" FontFamily="Comic Sans MS" FontSize="36" Foreground="Yellow"/>
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Label Content="Previous Seraches" FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
-            <ListBox Name="lsbxPreviousSearches" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12"/>
+            <Grid>
+                <ListBox Name="lsbxPreviousSearches" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12"/>
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <Label Content="Search: " FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>

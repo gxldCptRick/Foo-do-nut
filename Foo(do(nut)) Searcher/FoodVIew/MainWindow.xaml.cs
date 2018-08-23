@@ -35,21 +35,20 @@ namespace FoodVIew
         public void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             searches.Add(this.mainPage.txtbxSearch.Text);
+            this.mainPage.txtbxSearch.Text = "";
+            SaveSearches();
+            this.mainPage.lsbxPreviousSearches.ItemsSource = this.searches.Reverse();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.mainPage.btnSearch.Click += btnSearch_Click;
+            searches = new ObservableCollection<string>(fileGuy.ReadFile());
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            MessageBoxResult save = MessageBox.Show("Do you want to save your searches?", "Warning", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            if (save == MessageBoxResult.Yes)
-            {
-                SaveSearches();
-            }
+            
         }
 
         private void SaveSearches()

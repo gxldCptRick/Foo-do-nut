@@ -39,8 +39,7 @@ namespace FoodVIew
         private void ReadSearches()
         {
             searches = fileGuy.ReadFile();
-            //searches = searches.Reverse();
-            lsbxPreviousSearches.ItemsSource = searches;
+            lsbxPreviousSearches.ItemsSource = searches.Reverse();
         }
 
         public event EventHandler ButtonMethodThing;
