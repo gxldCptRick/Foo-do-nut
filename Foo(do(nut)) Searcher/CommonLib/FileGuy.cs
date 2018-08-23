@@ -19,7 +19,7 @@ namespace CommonLib
 
             if (!File.Exists(filePath))
             {
-                File.Create(filePath);
+                File.Create(filePath).Dispose();
             }
 
             using (StreamReader reader = new StreamReader(filePath))

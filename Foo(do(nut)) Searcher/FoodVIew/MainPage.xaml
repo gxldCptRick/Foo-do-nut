@@ -22,7 +22,7 @@
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Label Content="Previous Seraches" FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
             <Grid>
-                <ListBox Name="lsbxPreviousSearches" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12"/>
+                <ListBox Name="lsbxPreviousSearches" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12" MouseDoubleClick="DoubleClickList"/>
             </Grid>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1">
