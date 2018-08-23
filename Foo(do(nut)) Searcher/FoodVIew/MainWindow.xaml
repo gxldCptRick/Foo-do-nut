@@ -7,5 +7,6 @@
         mc:Ignorable="d"
         Title="FooDonut Search Engine" Height="450" Width="800" Closing="Window_Closing"
         Loaded="Window_Loaded">
-    <local:MainPage x:Name="mainPage"/>
+    <!--<local:MainPage x:Name="mainPage"/>-->
+    <Frame Name="frame"/>
 </Window>

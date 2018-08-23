@@ -53,5 +53,12 @@ namespace FoodVIew
         {
             txtbxSearch.Text = lsbxPreviousSearches.SelectedItem.ToString();
         }
+
+        private void btnSearchTestClick(object sender, RoutedEventArgs e)
+        {
+            //SearchPage page = new SearchPage(txtbxSearch.Text);
+            //NavigationService.Navigate(new SearchPage(txtbxSearch.Text));
+            NavigationService.Navigate(new Uri("SearchPage.xaml", UriKind.Relative));
+        }
     }
 }
