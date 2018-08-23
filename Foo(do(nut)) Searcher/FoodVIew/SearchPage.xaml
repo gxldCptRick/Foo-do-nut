@@ -15,20 +15,24 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height=".15*"/>
-            <RowDefinition Height=".85*"/>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".65*"/>
+            <RowDefinition Height=".1*"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="FooDonut Search Engine" FontFamily="Comic Sans MS" FontSize="36" Foreground="Yellow"/>
-        <StackPanel Grid.Row="1" Grid.Column="0">
-            <Label Content="Results: " FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
-            <ListBox Name="lsbxResults" Background="Yellow" Foreground="Purple">
-                
-            </ListBox>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1">
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Results" FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
+
+        <ListBox Grid.Row="2" Grid.Column="0" Name="lsbxResults" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12" Margin="10" Height="275"/>
+
+        <Button Grid.Row="3" Grid.Column="0" Name="btnClearResults" FontFamily="Comic Sans MS" FontSize="14" Content="Clear Results" Background="Yellow" Foreground="Purple" Margin="30,10"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="3">
             <Label Content="Search: " FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
-            <TextBox Name="txtbxSearch" Margin="10" TextAlignment="Right" Foreground="Purple" Background="Yellow" FontFamily="Comic Sans MS" FontSize="12"/>
-            <Button Name="btnSearch"  FontFamily="Comic Sans MS" FontSize="14" Content="Search" Background="Yellow" Foreground="Purple" Margin="30,10"/>
+            <TextBox Name="txtbxSearch" Margin="10, 10, 10, 10" Height="20" TextAlignment="Right" Foreground="Purple" Background="Yellow" FontFamily="Comic Sans MS" FontSize="12"/>
+            <Button Name="btnSearch" FontFamily="Comic Sans MS" FontSize="14" Content="Search" Background="Yellow" Foreground="Purple" Margin="30,10"/>
         </StackPanel>
+
     </Grid>
 </Page>
