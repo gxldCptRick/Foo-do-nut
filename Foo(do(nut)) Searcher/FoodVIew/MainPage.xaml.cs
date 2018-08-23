@@ -48,5 +48,21 @@ namespace FoodVIew
         {
             ButtonMethodThing?.Invoke(this, EventArgs.Empty);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+        private void DoubleClickList(object sender, MouseButtonEventArgs e)
+        {
+            txtbxSearch.Text = lsbxPreviousSearches.Items.CurrentItem.ToString();
+        }
     }
 }
