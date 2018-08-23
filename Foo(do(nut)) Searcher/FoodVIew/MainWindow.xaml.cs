@@ -40,10 +40,18 @@ namespace FoodVIew
             this.mainPage.lsbxPreviousSearches.ItemsSource = this.searches.Reverse();
         }
 
+        public void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            searches.Clear();
+            this.mainPage.lsbxPreviousSearches.ItemsSource = this.searches;
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.mainPage.btnSearch.Click += btnSearch_Click;
             searches = new ObservableCollection<string>(fileGuy.ReadFile());
+
+            mainPage.btnClear.Click += btnClear_Click;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
