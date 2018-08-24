@@ -18,6 +18,7 @@ namespace FoodVIew
         private MainPage mainPage = new MainPage();
         private SearchPage searchPage = new SearchPage();
         private IWikiService service = new TestWikiService();
+        private ResultPage resultPage = new ResultPage();
 
         public MainWindow()
         {
