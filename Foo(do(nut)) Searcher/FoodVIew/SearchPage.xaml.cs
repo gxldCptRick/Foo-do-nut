@@ -30,10 +30,5 @@ namespace FoodVIew
             InitializeComponent();
             txtbxSearch.Text = searchWord;
         }
-
-        private void DoubleClickList(object sender, MouseButtonEventArgs e)
-        {
-            // Open the results page with the selected item data
-        }
     }
 }

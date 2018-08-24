@@ -24,7 +24,7 @@
 
         <Label Grid.Row="1" Grid.Column="0" Content="Results:" FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
 
-        <ListBox Grid.Row="2" Grid.Column="0" Name="lsbxResults" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12" Margin="10" Height="275" MouseDoubleClick="DoubleClickList">
+        <ListBox Grid.Row="2" Grid.Column="0" Name="lsbxResults" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12" Margin="10" Height="275">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
