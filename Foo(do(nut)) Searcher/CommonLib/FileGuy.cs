@@ -9,9 +9,8 @@ namespace CommonLib
 {
     public class FileGuy
     {
-        public string filePath = "./searches/searches.txt";
 
-        public ICollection<string> ReadFile()
+        public ICollection<string> ReadFile(string filePath)
         {
             ICollection<string> searches = new HashSet<string>();
 
@@ -35,7 +34,7 @@ namespace CommonLib
             return searches;
         }
 
-        public void WriteFile(ICollection<string> searches)
+        public void WriteFile(ICollection<string> searches, string filePath)
         {
             using (StreamWriter writer = new StreamWriter(filePath))
             {

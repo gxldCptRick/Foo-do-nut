@@ -24,13 +24,13 @@
         
         <Label Grid.Row="1" Grid.Column="0" Content="Previous Seraches" FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
             
-        <ListBox Grid.Row="2" Grid.Column="0" MouseDoubleClick="DoubleClickList" Name="lsbxPreviousSearches" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12" Margin="10" Height="275"/>
+        <ListBox ItemsSource="{Binding Path=PreviousSearches}" Grid.Row="2" Grid.Column="0" MouseDoubleClick="DoubleClickList" Name="lsbxPreviousSearches" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12" Margin="10" Height="275"/>
             
         <Button Grid.Row="3" Grid.Column="0" Name="btnClear" FontFamily="Comic Sans MS" FontSize="14" Content="Clear Previous Searches" Background="Yellow" Foreground="Purple" Margin="30,10"/>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="3">
             <Label Content="Search: " FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
-            <TextBox Name="txtbxSearch" Margin="10, 10, 10, 10" Height="20" TextAlignment="Right" Foreground="Purple" Background="Yellow" FontFamily="Comic Sans MS" FontSize="12"/>
+            <TextBox Name="txtbxSearch" Text="{Binding Path=SearchTerm, Mode=TwoWay}" Margin="10, 10, 10, 10" Height="20" TextAlignment="Right" Foreground="Purple" Background="Yellow" FontFamily="Comic Sans MS" FontSize="12"/>
             <Button Name="btnSearch" FontFamily="Comic Sans MS" FontSize="14" Content="Search" Background="Yellow" Foreground="Purple" Margin="30,10"/>
         </StackPanel>
 

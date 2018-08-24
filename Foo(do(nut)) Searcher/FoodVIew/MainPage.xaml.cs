@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Navigation;
-using System.Collections.ObjectModel;
-using CommonLib;
 
 namespace FoodVIew
 {
@@ -15,35 +9,18 @@ namespace FoodVIew
     /// </summary>
     public partial class MainPage : Page
     {
-        ICollection<string> searches = new ObservableCollection<string>();
-        public string filePath = "./searches/searches.txt";
-        FileGuy fileGuy = new FileGuy();
-
         public MainPage()
         {
             InitializeComponent();
         }
         public void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            ReadSearches();
         }
 
-        private void ReadSearches()
-        {
-            searches = fileGuy.ReadFile();
-            lsbxPreviousSearches.ItemsSource = searches.Reverse();
-        }
-
-        public event EventHandler ButtonMethodThing;
-
-        protected virtual void OnButtonMethodThing()
-        {
-            ButtonMethodThing?.Invoke(this, EventArgs.Empty);
-        }
-        
         private void DoubleClickList(object sender, MouseButtonEventArgs e)
         {
-            txtbxSearch.Text = lsbxPreviousSearches.SelectedItem.ToString();
+            var mainView = (DataContext as MainViewData);
+            mainView.SearchTerm = (lsbxPreviousSearches.SelectedItem as string);
         }
     }
 }

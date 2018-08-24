@@ -1,33 +1,74 @@
-﻿using DataAccessLib.services.interfaces;
+﻿using CommonLib;
+using DataAccessLib.services.interfaces;
 using FoodVIew.testData;
+using FoodVIew.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using WikiData;
 
-namespace FoodVIew.ViewModels
+namespace FoodVIew
 {
-    public class MainViewData
+    public class MainViewData : ViewModelBase
     {
-        public List<WikiPageData> Results { get; set; }
+        private ObservableCollection<string> previousSearches;
+        public ObservableCollection<string> PreviousSearches
+        {
+            get => previousSearches; set => previousSearches = value;
+        }
+        private List<WikiPageData> _results;
+        public List<WikiPageData> Results
+        {
+            get => _results; set
+            {
+                _results = value;
+                PropertyChanging();
+            }
+        }
+        private string _searchTerm;
+
+        public string SearchTerm
+        {
+            get => _searchTerm;
+            set
+            {
+                _searchTerm = value;
+                PropertyChanging();
+            }
+        }
+
         private IWikiService service;
+        public string filePath = "./searches/searches.txt";
+        private FileGuy fileGuy = new FileGuy();
 
         public MainViewData()
         {
+            PreviousSearches = new ObservableCollection<string>(fileGuy.ReadFile(filePath));
             service = new TestWikiService();
         }
 
         public void GetSearchResults(string query)
         {
             Results = new List<WikiPageData>();
+            IEnumerable<WikiPage> loadedData;
             if (String.IsNullOrWhiteSpace(query))
             {
-                foreach (var wikiPage in service.GetAllPages())
-                {
-                    Results.Add(new WikiPageData(wikiPage));
-                }
+                loadedData = service.GetAllPages();
             }
+            else
+            {
+                loadedData = service.GetSpecificPagesBasedOnString(query);
+            }
+
+            foreach (var wikiPage in loadedData)
+            {
+                Results.Add(new WikiPageData(wikiPage));
+            }
+        }
+
+        public void Save()
+        {
+            fileGuy.WriteFile(previousSearches, filePath);
         }
     }
 }

@@ -8,5 +8,9 @@
         Title="FooDonut Search Engine" Height="450" Width="800" Closing="Window_Closing"
         Loaded="Window_Loaded">
     <!--<local:MainPage x:Name="mainPage"/>-->
-    <Frame Name="frame"/>
+    <Window.DataContext>
+        <local:MainViewData>
+        </local:MainViewData>
+    </Window.DataContext>
+    <Frame Name="frame" NavigationUIVisibility="Visible"/>
 </Window>
