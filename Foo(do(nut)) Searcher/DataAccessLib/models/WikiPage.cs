@@ -1,9 +1,4 @@
-﻿// To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
-//
-//    using WikiData;
-//
-//    var welcome = Welcome.FromJson(jsonString);
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using WikiData.Converters;
 

@@ -54,7 +54,7 @@
     <Compile Include="models\Data.cs" />
     <Compile Include="models\DataBook.cs" />
     <Compile Include="models\DataImage.cs" />
-    <Compile Include="models\enum\CodeFile1.cs" />
+    <Compile Include="models\enum\CitationType.cs" />
     <Compile Include="models\enum\TemplateEnum.cs" />
     <Compile Include="models\enum\LinkType.cs" />
     <Compile Include="models\Format.cs" />
@@ -69,6 +69,7 @@
     <Compile Include="models\TemplateElement.cs" />
     <Compile Include="models\WikiPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="services\interfaces\IWikiService.cs" />
     <Compile Include="services\WikiService.cs" />
   </ItemGroup>
   <ItemGroup>

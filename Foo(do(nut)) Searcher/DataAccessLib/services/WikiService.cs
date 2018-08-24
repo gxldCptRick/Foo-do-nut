@@ -1,20 +1,40 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using DataAccessLib.services.interfaces;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using WikiData;
 
 namespace DataAccessLib.services
 {
-    public class WikiService
+    public class WikiService : IWikiService
     {
-        public List<WikiPage> GetAllPages() {
+        public IEnumerable<WikiPage> GetAllPages() {
+            WebRequest request = WebRequest.Create("http://127.0.0.1:8080/wiki/food/");
+            request.Credentials = CredentialCache.DefaultCredentials;
+            using (WebResponse response = request.GetResponse())
+            {
+                Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+                using (var dataStream = response.GetResponseStream())
+                {
+                    using (var reader = new StreamReader(dataStream))
+                    {
+                        using(var jsonReader = new JsonTextReader(reader))
+                        while (jsonReader.Read())
+                        {
+                           var jobj = new JObject(jsonReader);
+                           var page  = WikiPage.FromJson(jobj.ToString());
+                            yield return page;
+                        }
+                    }
+                }
+            }
+        }
 
-            WebRequest request = WebRequest.Create("http://127.0.0.1:8080/wiki/yes");
+        public IEnumerable<WikiPage> GetSpecificPagesBasedOnString(string query){
+            WebRequest request = WebRequest.Create($"http://127.0.0.1:8080/wiki/food/{query}");
             request.Credentials = CredentialCache.DefaultCredentials;
             using (WebResponse response = request.GetResponse())
             {
@@ -25,14 +45,12 @@ namespace DataAccessLib.services
                     {
                         while (!reader.EndOfStream)
                         {
-                           var json = reader.ReadLine();
-                            JObject wikiPageJObj = JObject.Parse(json);
+                            var json = reader.ReadLine();
+                            var page = WikiPage.FromJson(json);
+                            yield return page;
                         }
                     }
                 }
-
-
-                return null;
             }
         }
     }
