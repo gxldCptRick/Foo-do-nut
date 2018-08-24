@@ -16,24 +16,19 @@ using System.Windows.Shapes;
 namespace FoodVIew
 {
     /// <summary>
-    /// Interaction logic for SearchPage.xaml
+    /// Interaction logic for ResultPage.xaml
     /// </summary>
-    public partial class SearchPage : Page
+    public partial class ResultPage : Page
     {
-        public SearchPage()
+        public ResultPage()
         {
             InitializeComponent();
         }
 
-        public SearchPage(string searchWord)
+        public ResultPage(string resultInfo)
         {
             InitializeComponent();
-            txtbxSearch.Text = searchWord;
-        }
-
-        private void DoubleClickList(object sender, MouseButtonEventArgs e)
-        {
-            // Open the results page with the selected item data
+            lblResult.Content = resultInfo;
         }
     }
 }
