@@ -31,7 +31,7 @@
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="3">
             <Label Content="Search: " FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
             <TextBox Name="txtbxSearch" Margin="10, 10, 10, 10" Height="20" TextAlignment="Right" Foreground="Purple" Background="Yellow" FontFamily="Comic Sans MS" FontSize="12"/>
-            <Button Name="btnSearch" FontFamily="Comic Sans MS" FontSize="14" Content="Search" Background="Yellow" Foreground="Purple" Margin="30,10"/>
+            <Button Name="btnSearch" FontFamily="Comic Sans MS" FontSize="14" Content="Search" Background="Yellow" Foreground="Purple" Margin="30,10" Click="btnSearchTestClick"/>
         </StackPanel>
 
     </Grid>

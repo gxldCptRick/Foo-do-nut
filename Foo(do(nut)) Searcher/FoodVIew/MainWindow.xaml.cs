@@ -26,6 +26,9 @@ namespace FoodVIew
         ObservableCollection<string> searches = new ObservableCollection<string>();
         public string filePath = "./searches/searches.txt";
         FileGuy fileGuy = new FileGuy();
+        MainPage mainPage = new MainPage();
+        SearchPage searchPage = new SearchPage();
+
 
         public MainWindow()
         {
@@ -34,6 +37,8 @@ namespace FoodVIew
 
         public void btnSearch_Click(object sender, RoutedEventArgs e)
         {
+            this.searchPage.txtbxSearch.Text = this.mainPage.txtbxSearch.Text;
+            frame.Navigate(this.searchPage);
             searches.Add(this.mainPage.txtbxSearch.Text);
             this.mainPage.txtbxSearch.Text = "";
             SaveSearches();
@@ -48,6 +53,8 @@ namespace FoodVIew
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            frame.Navigate(this.mainPage);
             this.mainPage.btnSearch.Click += btnSearch_Click;
             searches = new ObservableCollection<string>(fileGuy.ReadFile());
 
