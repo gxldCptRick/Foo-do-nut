@@ -28,6 +28,13 @@ namespace FoodVIew
             (DataContext as MainViewData)?.GetSearchResults(searchTerm);
         }
 
+        public void OpenResults(object sender, RoutedEventArgs e)
+        {
+            var selectedSearch = searchPage.lsbxResults.SelectedItem;
+            frame.Navigate(resultPage);
+            resultPage.lblResult.Content = selectedSearch;
+        }
+
         public void BtnClear_Click(object sender, RoutedEventArgs e)
         {
             (DataContext as MainViewData)?.PreviousSearches.Clear();
@@ -42,6 +49,7 @@ namespace FoodVIew
             frame.Navigate(mainPage);
             mainPage.btnSearch.Click += BtnSearch_Click;
             mainPage.btnClear.Click += BtnClear_Click;
+            searchPage.lsbxResults.MouseDoubleClick += OpenResults;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
