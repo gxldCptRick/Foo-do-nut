@@ -4,11 +4,11 @@ namespace FoodVIew.ViewModels
 {
     public class CitationViewData
     {
-        private Citation citation;
+        private readonly Citation _citation;
 
         public CitationViewData(Citation citation)
         {
-            this.citation = citation;
+            _citation = citation;
         }
     }
 }
