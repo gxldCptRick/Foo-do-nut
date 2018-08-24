@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
 using System.Collections.ObjectModel;
 using CommonLib;
 
@@ -52,13 +44,6 @@ namespace FoodVIew
         private void DoubleClickList(object sender, MouseButtonEventArgs e)
         {
             txtbxSearch.Text = lsbxPreviousSearches.SelectedItem.ToString();
-        }
-
-        private void btnSearchTestClick(object sender, RoutedEventArgs e)
-        {
-            //SearchPage page = new SearchPage(txtbxSearch.Text);
-            //NavigationService.Navigate(new SearchPage(txtbxSearch.Text));
-            NavigationService.Navigate(new Uri("SearchPage.xaml", UriKind.Relative));
         }
     }
 }

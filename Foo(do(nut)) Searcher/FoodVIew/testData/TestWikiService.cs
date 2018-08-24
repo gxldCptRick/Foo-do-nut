@@ -1,12 +1,8 @@
 ﻿using DataAccessLib.services.interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WikiData;
 
 namespace FoodVIew.testData
@@ -15,15 +11,22 @@ namespace FoodVIew.testData
     {
         public IEnumerable<WikiPage> GetAllPages()
         {
-            using (StreamReader reader = new StreamReader("./TestData.json")){
-                using (var jsonReader = new JsonTextReader(reader)) {
-                    while (jsonReader.Read())
+            using (FileStream fsStream = new FileStream("./TestData.json", FileMode.Open))
+            {
+                using (StreamReader reader = new StreamReader(fsStream))
+                {
+                    using (var jsonReader = new JsonTextReader(reader))
                     {
-                        var obj = new JObject(jsonReader);
-                        yield return WikiPage.FromJson(obj.ToString());
+                        while (jsonReader.Read())
+                        {
+                            if (jsonReader.TokenType == JsonToken.StartObject)
+                            {
+                                JObject obj = JObject.Load(jsonReader);
+                                yield return WikiPage.FromJson(obj.ToString());
+                            }
+                        }
                     }
                 }
-
             }
         }
 

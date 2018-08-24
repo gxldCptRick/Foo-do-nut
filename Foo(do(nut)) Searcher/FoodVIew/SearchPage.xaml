@@ -24,7 +24,15 @@
 
         <Label Grid.Row="1" Grid.Column="0" Content="Results:" FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
 
-        <ListBox Grid.Row="2" Grid.Column="0" Name="lsbxResults" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12" Margin="10" Height="275"/>
+        <ListBox Grid.Row="2" Grid.Column="0" Name="lsbxResults" Background="Yellow" Foreground="Purple" FontFamily="Comic Sans MS" FontSize="12" Margin="10" Height="275">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Label Name="Title" Content="{Binding Path=Title}" ></Label>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
         <Button Grid.Row="3" Grid.Column="0" Name="btnClearResults" FontFamily="Comic Sans MS" FontSize="14" Content="Clear Results" Background="Yellow" Foreground="Purple" Margin="30,10"/>
 

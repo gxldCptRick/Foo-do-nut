@@ -27,7 +27,7 @@ app.get('/wiki/:query', function(req, res){
 
 app.get('/wiki/food', function(req, res){
     MongoClient.connect(urlForMongo, {useNewUrlParser: true } , (err, client) => {
-        let resultStream = client.db(wikiName).collection(wikiCollection).find({title: {$regex: 'food', $options: 'i'}}).limit(5).stream();
+        let resultStream = client.db(wikiName).collection(wikiCollection).find({categories: {$regex: 'Food'}}).limit(1).stream();
         res.writeHead(200, { 'Content-Type': 'application/json'});
         console.log(req.ip);
         res.write('[');
@@ -43,9 +43,9 @@ app.get('/wiki/food', function(req, res){
         });
     });
 });
-app.get('wiki/food/:query', function(req, res){
+app.get('/wiki/food/:query', function(req, res){
     MongoClient.connect(urlForMongo, {useNewUrlParser: true } , (err, client) => {
-        let resultStream = client.db(wikiName).collection(wikiCollection).find({title: {$regex: `food ${req.params.query}`, $options: 'i'}}).limit(5).stream();
+        let resultStream = client.db(wikiName).collection(wikiCollection).find({title: {$regex: `${req.params.query}`, $options: 'i'}, categories: {$regex: 'Food'}}).limit(5).stream();
         res.writeHead(200, { 'Content-Type': 'application/json'});
         console.log(req.ip);
         resultStream.on('data', (data) => {

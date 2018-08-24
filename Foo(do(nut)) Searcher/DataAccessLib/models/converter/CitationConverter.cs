@@ -20,7 +20,7 @@ namespace WikiData.Converters
             {
                 return CitationType.Inline;
             }
-            throw new Exception("Cannot unmarshal type CitationType");
+            return CitationType.None;
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)
