@@ -24,5 +24,11 @@ namespace FoodVIew
         {
             InitializeComponent();
         }
+
+        public ResultPage(string resultInfo)
+        {
+            InitializeComponent();
+            lblResult.Content = resultInfo;
+        }
     }
 }

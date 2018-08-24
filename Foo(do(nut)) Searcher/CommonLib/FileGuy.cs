@@ -17,21 +17,21 @@ namespace CommonLib
 
             Directory.CreateDirectory("./searches");
 
-            if (!File.Exists(filePath))
+            if (File.Exists(filePath))
             {
-                File.Create(filePath).Dispose();
-            }
-
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                string line = reader.ReadLine();
-
-                while (line != null)
+                var fileStream = File.OpenRead(filePath);
+                using (StreamReader reader = new StreamReader(fileStream))
                 {
-                    searches.Add(line);
-                    line = reader.ReadLine();
+                    string line = reader.ReadLine();
+
+                    while (line != null)
+                    {
+                        searches.Add(line);
+                        line = reader.ReadLine();
+                    }
                 }
             }
+
             return searches;
         }
 

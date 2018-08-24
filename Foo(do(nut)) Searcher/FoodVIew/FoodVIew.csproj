@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="testData\TestWikiService.cs" />
     <Compile Include="ViewModels\CitationViewData.cs" />
+    <Compile Include="ViewModels\MainViewData.cs" />
     <Compile Include="ViewModels\SectionData.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\WikiPageData.cs" />
