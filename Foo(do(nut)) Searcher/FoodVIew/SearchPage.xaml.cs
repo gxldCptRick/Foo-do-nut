@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodVIew.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,10 +26,9 @@ namespace FoodVIew
             InitializeComponent();
         }
 
-        public SearchPage(string searchWord)
+        private void lsbxResults_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            InitializeComponent();
-            txtbxSearch.Text = searchWord;
+            (DataContext as MainViewData).SelectedPage = this.lsbxResults.SelectedItem as WikiPageData;
         }
     }
 }

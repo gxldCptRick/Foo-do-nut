@@ -22,10 +22,22 @@ namespace FoodVIew
             {
                 DataContext = DataContext
             };
+            searchPage.lsbxResults.MouseDoubleClick += ResultDoubleClicked;
             searchPage.txtbxSearch.Text = searchTerm;
             frame.Navigate(searchPage);
             (DataContext as MainViewData)?.PreviousSearches.Add(searchTerm);
             (DataContext as MainViewData)?.GetSearchResults(searchTerm);
+        }
+
+
+        public void ResultDoubleClicked(object sender, RoutedEventArgs e)
+        {
+            var resultsPage = new ResultPage()
+            {
+                DataContext = (DataContext as MainViewData).SelectedPage
+            };
+            resultsPage.btnBack.Click += (s, even) => BtnSearch_Click(s, even);
+            frame.Navigate(resultsPage);
         }
 
         public void BtnClear_Click(object sender, RoutedEventArgs e)

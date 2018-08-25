@@ -27,6 +27,8 @@ namespace FoodVIew
         }
         private string _searchTerm;
 
+        public WikiPageData SelectedPage { get; set; }
+
         public string SearchTerm
         {
             get => _searchTerm;

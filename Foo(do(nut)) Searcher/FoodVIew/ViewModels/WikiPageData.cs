@@ -13,6 +13,21 @@ namespace FoodVIew.ViewModels
         private readonly WikiPage _wikiPage;
         public string Title { get => _wikiPage.Title; }
         public List<SectionData> Sections { get; }
+        private string _text;
+        public string Text { get
+            {
+                if (_text is null)
+                {
+                    _text = "";
+                    foreach (var section in Sections)
+                    {
+                        _text += section.Text + "\r\n";
+                    }
+                }
+
+                return _text;
+            }
+        }
         public List<CitationViewData> Citations { get; }
         public WikiPageData(WikiPage wikiPage)
         {

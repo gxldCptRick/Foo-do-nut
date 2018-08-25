@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FoodVIew.ViewModels;
 
 namespace FoodVIew
 {
@@ -20,6 +21,8 @@ namespace FoodVIew
     /// </summary>
     public partial class ResultPage : Page
     {
+        private WikiPageData selectedPage;
+
         public ResultPage()
         {
             InitializeComponent();
@@ -29,6 +32,11 @@ namespace FoodVIew
         {
             InitializeComponent();
             lblResult.Content = resultInfo;
+        }
+
+        public ResultPage(WikiPageData selectedPage)
+        {
+            this.selectedPage = selectedPage;
         }
     }
 }
