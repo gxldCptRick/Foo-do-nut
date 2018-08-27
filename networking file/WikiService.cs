@@ -5,14 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text.RegularExpressions;
 using WikiData;
 
 namespace DataAccessLib.services
 {
     public class WikiService : IWikiService
     {
-        private const string BaseUrl = "http://localhost:8080/wiki/food/";
+        private const string BaseUrl = "https://localhost:8080/wiki/food/";
 
         private IEnumerable<WikiPage> GetPagesByUrl(string url)
         {
@@ -47,10 +46,7 @@ namespace DataAccessLib.services
 
         public IEnumerable<WikiPage> GetSpecificPagesBasedOnString(string query)
         {
-            IEnumerable<WikiPage> pages = new List<WikiPage>();
-            if(Regex.IsMatch(query, @"^[a-zA-Z0-9_]+$"))
-                pages =  GetPagesByUrl(BaseUrl + query);
-            return pages;
+            return GetPagesByUrl(BaseUrl + query);
         }
     }
 }

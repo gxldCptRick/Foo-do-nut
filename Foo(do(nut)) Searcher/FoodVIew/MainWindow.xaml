@@ -12,5 +12,8 @@
         <local:MainViewData>
         </local:MainViewData>
     </Window.DataContext>
-    <Frame Name="frame" NavigationUIVisibility="Visible"/>
+    <Grid>
+        <Frame Name="frame" NavigationUIVisibility="Visible"/>
+        <Label Name="loadingBar" Background="Aquamarine" Content="Loading..." VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"/>
+    </Grid>
 </Window>

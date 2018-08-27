@@ -33,7 +33,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Grid.Row="3" Grid.Column="0" Name="btnClearResults" FontFamily="Comic Sans MS" FontSize="14" Content="Clear Results" Background="Yellow" Foreground="Purple" Margin="30,10"/>
         <StackPanel Grid.Row="1" Grid.Column="1" Grid.RowSpan="3">
             <Label Content="Search: " FontFamily="Comic Sans MS" FontSize="14" Foreground="Yellow"/>
             <TextBox Text="{Binding Path=SearchTerm, Mode=TwoWay}" Name="txtbxSearch" Margin="10, 10, 10, 10" Height="20" TextAlignment="Right" Foreground="Purple" Background="Yellow" FontFamily="Comic Sans MS" FontSize="12"/>
