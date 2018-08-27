@@ -12,9 +12,14 @@ app.get('/wiki/:query', function(req, res){
         res.writeHead(200, { 'Content-Type': 'application/json'});
         console.log(req.ip);
         res.write('[');
+        let first = true;
         resultStream.on('data', (data) => {
+            if(first){
+                first = false;
+            }else {
+                res.write(',');
+            }
             res.write(JSON.stringify(data));
-            res.write(',');
         });
 
         resultStream.on('end', () => {
@@ -27,13 +32,18 @@ app.get('/wiki/:query', function(req, res){
 
 app.get('/wiki/food', function(req, res){
     MongoClient.connect(urlForMongo, {useNewUrlParser: true } , (err, client) => {
-        let resultStream = client.db(wikiName).collection(wikiCollection).find({categories: {$regex: 'Food'}}).limit(1).stream();
+        let resultStream = client.db(wikiName).collection(wikiCollection).find({categories: {$regex: 'Food'}}).stream();
         res.writeHead(200, { 'Content-Type': 'application/json'});
         console.log(req.ip);
         res.write('[');
+        let first = true;
         resultStream.on('data', (data) => {
+            if(first){
+                first = false;
+            }else {
+                res.write(',');
+            }
             res.write(JSON.stringify(data));
-            res.write(',');
         });
 
         resultStream.on('end', () => {
@@ -45,10 +55,17 @@ app.get('/wiki/food', function(req, res){
 });
 app.get('/wiki/food/:query', function(req, res){
     MongoClient.connect(urlForMongo, {useNewUrlParser: true } , (err, client) => {
-        let resultStream = client.db(wikiName).collection(wikiCollection).find({title: {$regex: `${req.params.query}`, $options: 'i'}, categories: {$regex: 'Food'}}).limit(5).stream();
+        let resultStream = client.db(wikiName).collection(wikiCollection).find({title: {$regex: `${req.params.query}`, $options: 'i'}, categories: {$regex: 'Food'}}).stream();
         res.writeHead(200, { 'Content-Type': 'application/json'});
         console.log(req.ip);
+        res.write('[')
+        let first = true;
         resultStream.on('data', (data) => {
+            if(first){
+                first = false;
+            }else {
+                res.write(',');
+            }
             res.write(JSON.stringify(data));
         });
 
