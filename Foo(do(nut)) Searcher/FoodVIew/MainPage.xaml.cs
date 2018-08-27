@@ -13,14 +13,5 @@ namespace FoodVIew
         {
             InitializeComponent();
         }
-        public void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void DoubleClickList(object sender, MouseButtonEventArgs e)
-        {
-            var mainView = (DataContext as MainViewData);
-            mainView.SearchTerm = (lsbxPreviousSearches.SelectedItem as string);
-        }
     }
 }

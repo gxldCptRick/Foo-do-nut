@@ -12,14 +12,9 @@ app.get('/wiki/:query', function(req, res){
         res.writeHead(200, { 'Content-Type': 'application/json'});
         console.log(req.ip);
         res.write('[');
-        let first = true;
         resultStream.on('data', (data) => {
-            if(first){
-                first = false;
-            }else {
-                res.write(',');
-            }
             res.write(JSON.stringify(data));
+            res.write(',');
         });
 
         resultStream.on('end', () => {
@@ -36,14 +31,9 @@ app.get('/wiki/food', function(req, res){
         res.writeHead(200, { 'Content-Type': 'application/json'});
         console.log(req.ip);
         res.write('[');
-        let first = true;
         resultStream.on('data', (data) => {
-            if(first){
-                first = false;
-            }else {
-                res.write(',');
-            }
             res.write(JSON.stringify(data));
+            res.write(',');
         });
 
         resultStream.on('end', () => {
@@ -58,14 +48,7 @@ app.get('/wiki/food/:query', function(req, res){
         let resultStream = client.db(wikiName).collection(wikiCollection).find({title: {$regex: `${req.params.query}`, $options: 'i'}, categories: {$regex: 'Food'}}).stream();
         res.writeHead(200, { 'Content-Type': 'application/json'});
         console.log(req.ip);
-        res.write('[')
-        let first = true;
         resultStream.on('data', (data) => {
-            if(first){
-                first = false;
-            }else {
-                res.write(',');
-            }
             res.write(JSON.stringify(data));
         });
 

@@ -6,6 +6,10 @@ using FoodVIew.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Threading;
 using WikiData;
 
 namespace FoodVIew
@@ -17,8 +21,8 @@ namespace FoodVIew
         {
             get => previousSearches; set => previousSearches = value;
         }
-        private List<WikiPageData> _results;
-        public List<WikiPageData> Results
+        private ObservableCollection<WikiPageData> _results;
+        public ObservableCollection<WikiPageData> Results
         {
             get => _results; set
             {
@@ -26,7 +30,7 @@ namespace FoodVIew
                 PropertyChanging();
             }
         }
-        private string _searchTerm;
+        private string _searchTerm = "";
 
         public WikiPageData SelectedPage { get; set; }
 
@@ -49,24 +53,37 @@ namespace FoodVIew
             PreviousSearches = new ObservableCollection<string>(fileGuy.ReadFile(filePath));
             service = new WikiService();
         }
-
-        public void GetSearchResults(string query)
+        private string _previousQuery = null;
+        public event EventHandler ResultsLoaded;
+        public async void GetSearchResultsAsync(string query)
         {
-            Results = new List<WikiPageData>();
-            IEnumerable<WikiPage> loadedData;
+            if (query != _previousQuery)
+            {
+                if (!PreviousSearches.Contains(query)) PreviousSearches.Add(query);
+                if (Results is null) Results = new ObservableCollection<WikiPageData>();
+                else Results.Clear();
+                var loadedData = await GetDataBasedOnQuery(query);
+                foreach (var wikiPage in loadedData)
+                {
+                    Results.Add(new WikiPageData(wikiPage));
+                }
+                _previousQuery = query;
+            }
+           ResultsLoaded?.Invoke(this, EventArgs.Empty);
+        }
+
+        private async Task<IList<WikiPage>> GetDataBasedOnQuery(string query)
+        {
+            IList<WikiPage> loadedData;
             if (String.IsNullOrWhiteSpace(query))
             {
-                loadedData = service.GetAllPages();
+                loadedData = await Task.Run<IList<WikiPage>>( () => service.GetAllPages().ToList());
             }
             else
             {
-                loadedData = service.GetSpecificPagesBasedOnString(query);
+                loadedData = await Task.Run<IList<WikiPage>>(() => service.GetSpecificPagesBasedOnString(query).ToList());
             }
-
-            foreach (var wikiPage in loadedData)
-            {
-                Results.Add(new WikiPageData(wikiPage));
-            }
+            return loadedData;
         }
 
         public void Save()

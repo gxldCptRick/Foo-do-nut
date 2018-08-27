@@ -1,6 +1,5 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
+using System.Windows.Input;
 
 namespace FoodVIew
 {
@@ -9,6 +8,8 @@ namespace FoodVIew
     /// </summary>
     public partial class MainWindow : Window
     {
+        private SearchPage search;
+        private MainPage mainPage;
 
         public MainWindow()
         {
@@ -17,16 +18,24 @@ namespace FoodVIew
 
         public void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-            var searchTerm = (DataContext as MainViewData)?.SearchTerm;
-            var searchPage = new SearchPage()
+            var mainViewData = DataContext as MainViewData;
+
+            var searchTerm = mainViewData?.SearchTerm?.Trim();
+            if (search is null)
             {
-                DataContext = DataContext
-            };
-            searchPage.lsbxResults.MouseDoubleClick += ResultDoubleClicked;
-            searchPage.txtbxSearch.Text = searchTerm;
-            frame.Navigate(searchPage);
-            (DataContext as MainViewData)?.PreviousSearches.Add(searchTerm);
-            (DataContext as MainViewData)?.GetSearchResults(searchTerm);
+                search = new SearchPage()
+                {
+                    DataContext = DataContext
+                };
+                search.lsbxResults.MouseDoubleClick += ResultDoubleClicked;
+                search.btnSearch.Click += BtnSearch_Click;
+                search.txtbxSearch.KeyDown += EnterPressed;
+            }
+
+            frame.Navigate(search);
+            search.btnSearch.IsEnabled = false;
+            loadingBar.Visibility = Visibility.Visible;
+            mainViewData.GetSearchResultsAsync(searchTerm);
         }
 
 
@@ -36,7 +45,8 @@ namespace FoodVIew
             {
                 DataContext = (DataContext as MainViewData).SelectedPage
             };
-            resultsPage.btnBack.Click += (s, even) => BtnSearch_Click(s, even);
+
+            resultsPage.btnBack.Click += (s, even) => frame.GoBack();
             frame.Navigate(resultsPage);
         }
 
@@ -45,15 +55,36 @@ namespace FoodVIew
             (DataContext as MainViewData)?.PreviousSearches.Clear();
         }
 
+        private KeyEventHandler EnterPressed;
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var mainPage = new MainPage()
+            mainPage = new MainPage()
             {
-                DataContext = this.DataContext
+                DataContext = DataContext
+            };
+            EnterPressed = (s, re) =>
+            {
+                if (re.Key == Key.Enter) this.BtnSearch_Click(s, re);
             };
             frame.Navigate(mainPage);
+            mainPage.txtbxSearch.KeyDown += EnterPressed;
             mainPage.btnSearch.Click += BtnSearch_Click;
             mainPage.btnClear.Click += BtnClear_Click;
+            mainPage.lsbxPreviousSearches.MouseDoubleClick += DoubleClickList;
+            (DataContext as MainViewData).ResultsLoaded += (s, en) =>
+            {
+                search.btnSearch.IsEnabled = true;
+                loadingBar.Visibility = Visibility.Hidden;
+            };
+
+        }
+
+        private void DoubleClickList(object sender, MouseButtonEventArgs e)
+        {
+            var mainView = (DataContext as MainViewData);
+            mainView.SearchTerm = (mainPage.lsbxPreviousSearches.SelectedItem as string);
+            BtnSearch_Click(sender, e);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using WikiData;
 
 namespace FoodVIew.ViewModels
@@ -11,10 +6,12 @@ namespace FoodVIew.ViewModels
     public class WikiPageData
     {
         private readonly WikiPage _wikiPage;
-        public string Title { get => _wikiPage.Title; }
+        public string Title => _wikiPage.Title;
         public List<SectionData> Sections { get; }
         private string _text;
-        public string Text { get
+        public string Text
+        {
+            get
             {
                 if (_text is null)
                 {
@@ -34,14 +31,19 @@ namespace FoodVIew.ViewModels
             _wikiPage = wikiPage;
             Sections = new List<SectionData>();
             Citations = new List<CitationViewData>();
-            foreach (var section in wikiPage.Sections)
+            if (wikiPage.Sections != null)
             {
-                Sections.Add(new SectionData(section));
+                foreach (var section in wikiPage.Sections)
+                {
+                    Sections.Add(new SectionData(section));
+                }
             }
-
-            foreach (var citation in wikiPage.Citations)
+            if (wikiPage.Citations != null)
             {
-                Citations.Add(new CitationViewData(citation));
+                foreach (var citation in wikiPage.Citations)
+                {
+                    Citations.Add(new CitationViewData(citation));
+                }
             }
         }
     }
