@@ -1,4 +1,5 @@
 ﻿using CommonLib;
+using DataAccessLib.services;
 using DataAccessLib.services.interfaces;
 using FoodVIew.testData;
 using FoodVIew.ViewModels;
@@ -46,7 +47,7 @@ namespace FoodVIew
         public MainViewData()
         {
             PreviousSearches = new ObservableCollection<string>(fileGuy.ReadFile(filePath));
-            service = new TestWikiService();
+            service = new WikiService();
         }
 
         public void GetSearchResults(string query)

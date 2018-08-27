@@ -11,11 +11,11 @@ namespace DataAccessLib.services
 {
     public class WikiService : IWikiService
     {
-        private const string BaseUrl = "https://localhost:8080/wiki/food/";
+        private const string BaseUrl = "https://localhost:8080/wiki/food";
 
         private IEnumerable<WikiPage> GetPagesByUrl(string url)
         {
-            WebRequest request = WebRequest.Create(url);
+            WebRequest request = WebRequest.Create(BaseUrl + url);
             request.Credentials = CredentialCache.DefaultCredentials;
             using (WebResponse response = request.GetResponse())
             {
