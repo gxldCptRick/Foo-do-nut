@@ -8,7 +8,7 @@ const app = express();
 
 app.get('/wiki/:query', function(req, res){
     MongoClient.connect(urlForMongo, {useNewUrlParser: true } , (err, client) => {
-        let resultStream = client.db(wikiName).collection(wikiCollection).find({title: {$regex: req.params.query, $options: 'i'}}).limit(5).stream();
+        let resultStream = client.db(wikiName).collection(wikiCollection).find({title: {$regex: req.params.query, $options: 'i'}}).stream();
         res.writeHead(200, { 'Content-Type': 'application/json'});
         console.log(req.ip);
         res.write('[');
@@ -70,6 +70,7 @@ app.get('/wiki/food/:query', function(req, res){
         });
 
         resultStream.on('end', () => {
+            res.write(']');
             res.end();
             console.log("closed");
         });

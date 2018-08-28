@@ -17,8 +17,5 @@ namespace WikiData
 
         [JsonProperty("website", NullValueHandling = NullValueHandling.Ignore)]
         public string Website { get; set; }
-
-        [JsonProperty("access-date", NullValueHandling = NullValueHandling.Ignore)]
-        public DateTimeOffset? AccessDate { get; set; }
     }
 }
